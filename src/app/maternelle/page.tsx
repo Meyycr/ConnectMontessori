@@ -1,20 +1,25 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Maternelle() {
+  const [showTarifs, setShowTarifs] = useState(false);
+  const [showFournitures, setShowFournitures] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Top Bar */}
       <div className="bg-gray-800 text-white py-2 px-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
           <div className="flex items-center space-x-6">
-            <span>Lun à Ven – 9h00 à 17h00</span>
-            <span>+33 (0)1 23 45 67 89</span>
+            <span>Lun à Ven – 8h00 à 18h00</span>
+            <span>+212 6 75 75 19 09</span>
           </div>
           <div className="hidden md:block">
-            <span>123 Rue de l'Éducation, 75001 Paris</span>
+            <span>348 Village Pilote Dar Bouazza, Casablanca</span>
           </div>
           <div className="flex items-center space-x-4">
             <a href="#" className="hover:text-blue-400 transition-colors">
@@ -37,44 +42,110 @@ export default function Maternelle() {
           <div className="flex items-center">
             <Link
               href="/"
-              className="bg-green-500 text-white px-6 py-2 rounded-full font-bold text-xl hover:bg-green-600 transition-colors"
+              className="flex items-center space-x-3 text-gray-700 hover:text-green-600 transition-all duration-300 font-bold text-xl group"
             >
-              Connect Montessori
+              <Image
+                src="/images/logo.png"
+                alt="Connect Montessori Logo"
+                width={32}
+                height={32}
+                className="object-contain group-hover:scale-110 transition-transform duration-300"
+              />
+              <span className="group-hover:translate-x-1 transition-transform duration-300">
+                Connect Montessori
+              </span>
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-8 text-gray-700">
+          <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
+            >
+              <span className="relative z-10">Accueil</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
+            </Link>
+            <Link
+              href="/maternelle"
+              className="relative group font-bold text-lg text-green-600 transition-all duration-300 py-2 px-1"
+            >
+              <span className="relative z-10">Maternelle</span>
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 rounded-lg -m-2"></div>
+            </Link>
+            <Link
+              href="/cours-soutien"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
+            >
+              <span className="relative z-10">Cours de Soutien</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
+            </Link>
+            <Link
+              href="/contact"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
+            >
+              <span className="relative z-10">Contact</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
+            </Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-800 hover:text-green-600 transition-colors"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+          <div className="px-4 py-6 space-y-4">
+            <Link
+              href="/"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
             >
               Accueil
             </Link>
             <Link
               href="/maternelle"
-              className="text-green-600 font-medium border-b-2 border-green-600"
+              className="block font-bold text-lg text-green-600 transition-colors py-2"
             >
               Maternelle
             </Link>
             <Link
               href="/cours-soutien"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
             >
               Cours de Soutien
             </Link>
             <Link
               href="/contact"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
             >
               Contact
             </Link>
           </div>
-          <div>
-            <button className="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors font-medium">
-              Prendre RDV
-            </button>
-          </div>
         </div>
-      </nav>
+      )}
 
       {/* Hero Section Maternelle */}
       <section className="bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 min-h-[60vh] relative overflow-hidden">
@@ -106,19 +177,421 @@ export default function Maternelle() {
               dès le plus jeune âge.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-white text-gray-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+              <button
+                onClick={() => {
+                  document.getElementById("notre-approche")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+                className="bg-white text-gray-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+              >
                 Découvrir la Pédagogie
               </button>
-              <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105">
-                Visiter l'École
+              <button
+                onClick={() => {
+                  document.getElementById("pret-commencer")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
+              >
+                Informations Pratiques
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section Pédagogie Montessori */}
-      <section className="py-20 bg-white">
+      {/* Section Prêt à Commencer l'Aventure */}
+      <section id="pret-commencer" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Prêt à Commencer l'Aventure ?
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Découvrez nos tarifs, informations pratiques et préparez la
+              rentrée de votre enfant
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+            {/* Bouton Tarifs */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-4xl">💰</span>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">
+                    Tarifs & Inscriptions
+                  </h3>
+                  <p className="text-white/90 mb-6">
+                    Découvrez nos tarifs transparents et nos options
+                    d'inscription
+                  </p>
+                  <button
+                    onClick={() => setShowTarifs(true)}
+                    className="bg-white text-green-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+                  >
+                    Voir les Tarifs
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Bouton Fournitures */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-4xl">🎒</span>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">
+                    Fournitures & Matériel
+                  </h3>
+                  <p className="text-white/90 mb-6">
+                    Liste des fournitures nécessaires et matériel pédagogique
+                  </p>
+                  <button
+                    onClick={() => setShowFournitures(true)}
+                    className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+                  >
+                    Voir la Liste
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Modal Tarifs */}
+      {showTarifs && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-green-500 to-blue-600 text-white p-8 rounded-t-3xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full"></div>
+              <div className="relative z-10">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-2">
+                      Frais de Scolarité
+                    </h2>
+                    <p className="text-xl opacity-90">Rentrée 2025 / 2026</p>
+                  </div>
+                  <button
+                    onClick={() => setShowTarifs(false)}
+                    className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-8">
+              {/* Table */}
+              <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-6 mb-8">
+                <div className="grid grid-cols-4 gap-6 text-center">
+                  {/* Headers */}
+                  <div className="font-bold text-lg text-gray-800">Frais</div>
+                  <div className="font-bold text-lg text-green-600">P.S</div>
+                  <div className="font-bold text-lg text-blue-600">M.S</div>
+                  <div className="font-bold text-lg text-purple-600">G.S</div>
+
+                  {/* Frais d'inscription */}
+                  <div className="text-left">
+                    <div className="font-semibold text-gray-800">
+                      Frais d'inscription
+                    </div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      (Assurance + juin)
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-green-600">
+                    2800 DH
+                  </div>
+                  <div className="text-2xl font-bold text-blue-600">
+                    2800 DH
+                  </div>
+                  <div className="text-2xl font-bold text-purple-600">
+                    2800 DH
+                  </div>
+
+                  {/* 1er paiement */}
+                  <div className="text-left">
+                    <div className="font-semibold text-gray-800">
+                      Frais de scolarité
+                    </div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      1er paiement (Septembre-Octobre-Novembre)
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-green-600">
+                    3900 DH
+                  </div>
+                  <div className="text-2xl font-bold text-blue-600">
+                    3900 DH
+                  </div>
+                  <div className="text-2xl font-bold text-purple-600">
+                    3900 DH
+                  </div>
+
+                  {/* 2ème paiement */}
+                  <div className="text-left">
+                    <div className="font-semibold text-gray-800">
+                      Frais de scolarité
+                    </div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      2ème paiement (Décembre-Janvier-Février)
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-green-600">
+                    3900 DH
+                  </div>
+                  <div className="text-2xl font-bold text-blue-600">
+                    3900 DH
+                  </div>
+                  <div className="text-2xl font-bold text-purple-600">
+                    3900 DH
+                  </div>
+
+                  {/* 3ème paiement */}
+                  <div className="text-left">
+                    <div className="font-semibold text-gray-800">
+                      Frais de scolarité
+                    </div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      3ème paiement (Mars-Avril-Mai)
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-green-600">
+                    3900 DH
+                  </div>
+                  <div className="text-2xl font-bold text-blue-600">
+                    3900 DH
+                  </div>
+                  <div className="text-2xl font-bold text-purple-600">
+                    3900 DH
+                  </div>
+
+                  {/* Garde */}
+                  <div className="text-left">
+                    <div className="font-semibold text-gray-800">Garde</div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      (De 15h30 à 17h00)
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-green-600">
+                    200 DH
+                  </div>
+                  <div className="text-2xl font-bold text-blue-600">200 DH</div>
+                  <div className="text-2xl font-bold text-purple-600">
+                    200 DH
+                  </div>
+                </div>
+              </div>
+
+              {/* Informations supplémentaires */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+                      <span className="text-2xl">📋</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800">
+                      Informations Importantes
+                    </h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-600">
+                    <li>• P.S = Petite Section (3-4 ans)</li>
+                    <li>• M.S = Moyenne Section (4-5 ans)</li>
+                    <li>• G.S = Grande Section (5-6 ans)</li>
+                    <li>• Tous les montants sont en Dirhams (DH)</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Call to action */}
+              <div className="text-center">
+                <div className="bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl p-8 text-white">
+                  <h3 className="text-2xl font-bold mb-4">
+                    Prêt à nous rejoindre ?
+                  </h3>
+                  <p className="text-lg opacity-90 mb-6">
+                    Contactez-nous pour plus d'informations ou pour planifier
+                    une visite
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    <button className="bg-white text-green-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                      📞 Nous Appeler
+                    </button>
+                    <button className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-green-600 transition-colors">
+                      📧 Nous Écrire
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Fournitures */}
+      {showFournitures && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white p-8 rounded-t-3xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full"></div>
+              <div className="relative z-10">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-2">
+                      Liste des Fournitures
+                    </h2>
+                    <p className="text-xl opacity-90">
+                      Matériel nécessaire pour la rentrée
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setShowFournitures(false)}
+                    className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-8">
+              {/* Fournitures Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                {/* Hygiène */}
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                      <span className="text-2xl">🧴</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800">Hygiène</h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-600">
+                    <li>• Sandales</li>
+                    <li>• Petite serviette</li>
+                    <li>• Brosse à dents</li>
+                    <li>• Dentifrice</li>
+                  </ul>
+                </div>
+
+                {/* Trousse */}
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+                      <span className="text-2xl">✏️</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800">Trousse</h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-600">
+                    <li>• 2 stylos: 1 bleu et 1 vert</li>
+                    <li>• 1 crayon</li>
+                    <li>• 1 taille-crayon</li>
+                    <li>• 1 gomme</li>
+                    <li>• 2 paquets de crayons de couleur</li>
+                    <li>• 2 paquets de feutres en couleur</li>
+                    <li>• 2 bâtons de colle</li>
+                    <li>• 2 pinceaux: 1 plat et 1 rond</li>
+                    <li>• Tubes de peinture: toutes les couleurs</li>
+                    <li>• 1 palette de peinture</li>
+                    <li>• 1 tablier de peinture</li>
+                    <li>• Pâte à modeler: toutes les couleurs</li>
+                  </ul>
+                </div>
+
+                {/* Cartable */}
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
+                      <span className="text-2xl">🎒</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800">
+                      Cartable
+                    </h3>
+                  </div>
+                  <ul className="space-y-2 text-gray-600">
+                    <li>• 4 cahiers petit format 50p</li>
+                    <li>
+                      • 4 couvertures petit format: 1 bleu, 1 vert, 1 jaune et 1
+                      rouge
+                    </li>
+                    <li>• 1 cahier de texte</li>
+                    <li>• 1 ardoise</li>
+                    <li>• 1 brosse</li>
+                    <li>• 2 feutres</li>
+                    <li>• 2 paquets de papier canson en couleur</li>
+                    <li>• 2 paquets de papier canson blanc</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Call to action */}
+              <div className="text-center">
+                <div className="bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl p-8 text-white">
+                  <h3 className="text-2xl font-bold mb-4">
+                    Besoin d'aide pour les fournitures ?
+                  </h3>
+                  <p className="text-lg opacity-90 mb-6">
+                    Notre équipe peut vous guider dans le choix des matériaux et
+                    vous conseiller sur la qualité
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    <button className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                      📞 Nous Appeler
+                    </button>
+                    <button className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                      📧 Nous Écrire
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Section Notre Approche */}
+      <section id="notre-approche" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Contenu textuel */}
@@ -359,87 +832,6 @@ export default function Maternelle() {
         </div>
       </section>
 
-      {/* Section Boutons d'Action */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Prêt à Commencer l'Aventure ?
-            </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Découvrez nos tarifs, informations pratiques et préparez la
-              rentrée de votre enfant
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Bouton Tarifs */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-4xl">💰</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">
-                    Tarifs & Inscriptions
-                  </h3>
-                  <p className="text-white/90 mb-6">
-                    Découvrez nos tarifs transparents et nos options
-                    d'inscription
-                  </p>
-                  <button className="bg-white text-green-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
-                    Voir les Tarifs
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Bouton Informations */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-4xl">ℹ️</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">
-                    Informations Pratiques
-                  </h3>
-                  <p className="text-white/90 mb-6">
-                    Horaires, planning, activités et organisation de la journée
-                  </p>
-                  <button className="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
-                    En Savoir Plus
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Bouton Fournitures */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-4xl">🎒</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">
-                    Fournitures & Matériel
-                  </h3>
-                  <p className="text-white/90 mb-6">
-                    Liste des fournitures nécessaires et matériel pédagogique
-                  </p>
-                  <button className="bg-white text-orange-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
-                    Voir la Liste
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Section Avis des Parents */}
       <section className="py-20 bg-gradient-to-r from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
@@ -465,8 +857,8 @@ export default function Maternelle() {
                   S
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-800">Sophie Martin</h4>
-                  <p className="text-gray-500 text-sm">Maman de Emma, 4 ans</p>
+                  <h4 className="font-bold text-gray-800">Maman de Lina</h4>
+                  <p className="text-gray-500 text-sm">4 ans</p>
                 </div>
                 <div className="ml-auto">
                   <div className="flex space-x-1">
@@ -484,10 +876,10 @@ export default function Maternelle() {
                 </div>
               </div>
               <p className="text-gray-600 leading-relaxed italic">
-                "Connect Montessori a transformé l'expérience d'apprentissage
-                d'Emma. Elle est devenue plus autonome et curieuse. Les
-                éducateurs sont exceptionnels et l'environnement est
-                parfaitement adapté aux enfants."
+                "Connect Montessori a transformé l'expérience d'apprentissage de
+                Lina. Elle est devenue plus autonome et curieuse. Les éducateurs
+                sont exceptionnels et l'environnement est parfaitement adapté
+                aux enfants."
               </p>
             </div>
 
@@ -498,8 +890,8 @@ export default function Maternelle() {
                   T
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-800">Thomas Dubois</h4>
-                  <p className="text-gray-500 text-sm">Papa de Lucas, 5 ans</p>
+                  <h4 className="font-bold text-gray-800">Papa de Yassir</h4>
+                  <p className="text-gray-500 text-sm">5 ans</p>
                 </div>
                 <div className="ml-auto">
                   <div className="flex space-x-1">
@@ -517,7 +909,7 @@ export default function Maternelle() {
                 </div>
               </div>
               <p className="text-gray-600 leading-relaxed italic">
-                "La pédagogie Montessori a permis à Lucas de développer sa
+                "La pédagogie Montessori a permis à Yassir de développer sa
                 confiance en lui et ses compétences sociales. L'équipe
                 pédagogique est très professionnelle et bienveillante. Je
                 recommande vivement !"
@@ -531,8 +923,8 @@ export default function Maternelle() {
                   M
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-800">Marie Laurent</h4>
-                  <p className="text-gray-500 text-sm">Maman de Chloé, 3 ans</p>
+                  <h4 className="font-bold text-gray-800">Maman de Sara</h4>
+                  <p className="text-gray-500 text-sm">3 ans</p>
                 </div>
                 <div className="ml-auto">
                   <div className="flex space-x-1">
@@ -550,7 +942,7 @@ export default function Maternelle() {
                 </div>
               </div>
               <p className="text-gray-600 leading-relaxed italic">
-                "Chloé adore aller à l'école ! L'approche Montessori respecte
+                "Sara adore aller à l'école ! L'approche Montessori respecte
                 vraiment son rythme et ses centres d'intérêt. Elle a fait des
                 progrès incroyables en motricité fine et en langage."
               </p>
@@ -562,8 +954,8 @@ export default function Maternelle() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-3">
               <h3 className="text-xl font-bold mb-4 text-green-400">
                 Connect Montessori
               </h3>
@@ -572,7 +964,7 @@ export default function Maternelle() {
                 Montessori pour un développement optimal de l'enfant.
               </p>
             </div>
-            <div>
+            <div className="md:col-span-2">
               <h4 className="text-lg font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-gray-300">
                 <li>Maternelle Montessori</li>
@@ -581,16 +973,16 @@ export default function Maternelle() {
                 <li>Activités Éducatives</li>
               </ul>
             </div>
-            <div>
+            <div className="md:col-span-4">
               <h4 className="text-lg font-semibold mb-4">Contact</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>📞 +33 (0)1 23 45 67 89</li>
-                <li>📧 contact@connectmontessori.fr</li>
-                <li>📍 123 Rue de l'Éducation</li>
-                <li>🏙️ 75001 Paris, France</li>
+                <li>📞 +212 6 75 75 19 09</li>
+                <li>📧 connectmontessoridedarb@gmail.com</li>
+                <li>📍 348 Village Pilote Dar Bouazza</li>
+                <li>🏙️ Casablanca, Maroc</li>
               </ul>
             </div>
-            <div>
+            <div className="md:col-span-3">
               <h4 className="text-lg font-semibold mb-4">Suivez-nous</h4>
               <div className="flex space-x-4">
                 <a
@@ -621,7 +1013,7 @@ export default function Maternelle() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Connect Montessori. Tous droits réservés.</p>
+            <p>&copy; 2025 Connect Montessori. Tous droits réservés.</p>
           </div>
         </div>
       </footer>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function Contact() {
     sujet: "",
     message: "",
   });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,11 +40,11 @@ export default function Contact() {
       <div className="bg-gray-800 text-white py-2 px-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
           <div className="flex items-center space-x-6">
-            <span>Lun à Ven – 9h00 à 17h00</span>
-            <span>+33 (0)1 23 45 67 89</span>
+            <span>Lun à Ven – 8h00 à 18h00</span>
+            <span>+212 6 75 75 19 09</span>
           </div>
           <div className="hidden md:block">
-            <span>123 Rue de l'Éducation, 75001 Paris</span>
+            <span>348 Village Pilote Dar Bouazza, Casablanca</span>
           </div>
           <div className="flex items-center space-x-4">
             <a href="#" className="hover:text-blue-400 transition-colors">
@@ -65,44 +67,110 @@ export default function Contact() {
           <div className="flex items-center">
             <Link
               href="/"
-              className="bg-green-500 text-white px-6 py-2 rounded-full font-bold text-xl hover:bg-green-600 transition-colors"
+              className="flex items-center space-x-3 text-gray-700 hover:text-green-600 transition-all duration-300 font-bold text-xl group"
             >
-              Connect Montessori
+              <Image
+                src="/images/logo.png"
+                alt="Connect Montessori Logo"
+                width={32}
+                height={32}
+                className="object-contain group-hover:scale-110 transition-transform duration-300"
+              />
+              <span className="group-hover:translate-x-1 transition-transform duration-300">
+                Connect Montessori
+              </span>
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-8 text-gray-700">
+          <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
+            >
+              <span className="relative z-10">Accueil</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
+            </Link>
+            <Link
+              href="/maternelle"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
+            >
+              <span className="relative z-10">Maternelle</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
+            </Link>
+            <Link
+              href="/cours-soutien"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
+            >
+              <span className="relative z-10">Cours de Soutien</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
+            </Link>
+            <Link
+              href="/contact"
+              className="relative group font-bold text-lg text-green-600 transition-all duration-300 py-2 px-1"
+            >
+              <span className="relative z-10">Contact</span>
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 rounded-lg -m-2"></div>
+            </Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-800 hover:text-green-600 transition-colors"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+          <div className="px-4 py-6 space-y-4">
+            <Link
+              href="/"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
             >
               Accueil
             </Link>
             <Link
               href="/maternelle"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
             >
               Maternelle
             </Link>
             <Link
               href="/cours-soutien"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
             >
               Cours de Soutien
             </Link>
             <Link
               href="/contact"
-              className="text-green-600 font-medium border-b-2 border-green-600"
+              className="block font-bold text-lg text-green-600 transition-colors py-2"
             >
               Contact
             </Link>
           </div>
-          <div>
-            <button className="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors font-medium">
-              Prendre RDV
-            </button>
-          </div>
         </div>
-      </nav>
+      )}
 
       {/* Hero Section Contact */}
       <section className="bg-gradient-to-br from-green-500 via-blue-600 to-purple-700 min-h-[50vh] relative overflow-hidden">
@@ -317,10 +385,10 @@ export default function Contact() {
                       <div>
                         <h3 className="text-xl font-bold mb-2">Téléphone</h3>
                         <p className="text-white/90 text-lg">
-                          +33 (0)1 23 45 67 89
+                          +212 6 75 75 19 09
                         </p>
                         <p className="text-white/80 text-sm">
-                          Lun-Ven: 9h00-17h00
+                          Lun-Ven: 8h00-18h00
                         </p>
                       </div>
                     </div>
@@ -338,7 +406,7 @@ export default function Contact() {
                       <div>
                         <h3 className="text-xl font-bold mb-2">WhatsApp</h3>
                         <p className="text-white/90 text-lg">
-                          +33 (0)6 12 34 56 78
+                          +212 6 75 75 19 09
                         </p>
                         <p className="text-white/80 text-sm">
                           Réponse rapide garantie
@@ -359,10 +427,10 @@ export default function Contact() {
                       <div>
                         <h3 className="text-xl font-bold mb-2">Adresse</h3>
                         <p className="text-white/90 text-lg">
-                          123 Rue de l'Éducation
+                          348 Village Pilote Dar Bouazza
                         </p>
                         <p className="text-white/80 text-sm">
-                          75001 Paris, France
+                          Casablanca, Maroc
                         </p>
                       </div>
                     </div>
@@ -385,9 +453,6 @@ export default function Contact() {
                           Lundi - Vendredi
                         </p>
                         <p className="text-white/80 text-sm">8h00 - 18h00</p>
-                        <p className="text-white/80 text-sm">
-                          Samedi: 9h00 - 12h00
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -425,8 +490,8 @@ export default function Contact() {
               Notre Localisation
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Situés au cœur de Paris, nous sommes facilement accessibles en
-              transport en commun
+              Situés à Dar Bouazza, Casablanca, nous sommes facilement
+              accessibles.
             </p>
           </div>
 
@@ -440,26 +505,14 @@ export default function Contact() {
                 <span className="text-6xl">🗺️</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                123 Rue de l'Éducation, 75001 Paris
+                348 Village Pilote Dar Bouazza, Casablanca
               </h3>
               <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                Notre école est située dans le 1er arrondissement de Paris, à
-                proximité des transports en commun et des principales
-                attractions de la ville. Un emplacement idéal pour les familles
-                parisiennes.
+                Notre école est située à Dar Bouazza, Casablanca. Un emplacement
+                idéal pour les familles de Dar Bouazza.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                <div className="bg-white rounded-xl p-4 shadow-sm">
-                  <div className="text-2xl mb-2">🚇</div>
-                  <p className="font-semibold text-gray-800">Métro</p>
-                  <p className="text-sm text-gray-600">Ligne 1, 4, 7, 11, 14</p>
-                </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm">
-                  <div className="text-2xl mb-2">🚌</div>
-                  <p className="font-semibold text-gray-800">Bus</p>
-                  <p className="text-sm text-gray-600">Lignes 20, 29, 38, 47</p>
-                </div>
-                <div className="bg-white rounded-xl p-4 shadow-sm">
+              <div className="flex justify-center">
+                <div className="bg-white rounded-xl p-4 shadow-sm max-w-xs">
                   <div className="text-2xl mb-2">🚗</div>
                   <p className="font-semibold text-gray-800">Parking</p>
                   <p className="text-sm text-gray-600">
@@ -475,8 +528,8 @@ export default function Contact() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-3">
               <h3 className="text-xl font-bold mb-4 text-green-400">
                 Connect Montessori
               </h3>
@@ -485,7 +538,7 @@ export default function Contact() {
                 Montessori pour un développement optimal de l'enfant.
               </p>
             </div>
-            <div>
+            <div className="md:col-span-2">
               <h4 className="text-lg font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-gray-300">
                 <li>Maternelle Montessori</li>
@@ -494,16 +547,16 @@ export default function Contact() {
                 <li>Activités Éducatives</li>
               </ul>
             </div>
-            <div>
+            <div className="md:col-span-4">
               <h4 className="text-lg font-semibold mb-4">Contact</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>📞 +33 (0)1 23 45 67 89</li>
-                <li>📧 contact@connectmontessori.fr</li>
-                <li>📍 123 Rue de l'Éducation</li>
-                <li>🏙️ 75001 Paris, France</li>
+                <li>📞 +212 6 75 75 19 09</li>
+                <li>📧 connectmontessoridedarb@gmail.com</li>
+                <li>📍 348 Village Pilote Dar Bouazza</li>
+                <li>🏙️ Casablanca, Maroc</li>
               </ul>
             </div>
-            <div>
+            <div className="md:col-span-3">
               <h4 className="text-lg font-semibold mb-4">Suivez-nous</h4>
               <div className="flex space-x-4">
                 <a
@@ -534,7 +587,7 @@ export default function Contact() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Connect Montessori. Tous droits réservés.</p>
+            <p>&copy; 2025 Connect Montessori. Tous droits réservés.</p>
           </div>
         </div>
       </footer>

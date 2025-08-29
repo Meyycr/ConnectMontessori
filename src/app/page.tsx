@@ -1,46 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 export default function Home() {
-  // Fonction pour le carrousel des avis
-  React.useEffect(() => {
-    const container = document.getElementById("testimonials-container");
-    if (!container) return;
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    let currentIndex = 0;
-    const totalSlides = 5;
-    const slideWidth = 400 + 32; // largeur de la carte + espacement
-
-    const moveToSlide = (index: number) => {
-      currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-      const translateX = -currentIndex * slideWidth;
-      container.style.transform = `translateX(${translateX}px)`;
-
-      // Mise à jour des indicateurs
-      const indicators = document.querySelectorAll("[data-indicator]");
-      indicators.forEach((indicator, i) => {
-        if (i === currentIndex) {
-          indicator.classList.add("bg-blue-500");
-          indicator.classList.remove("bg-gray-300");
-        } else {
-          indicator.classList.remove("bg-blue-500");
-          indicator.classList.add("bg-gray-300");
-        }
+  // Fonction pour le défilement fluide vers Notre École
+  const scrollToNotreEcole = () => {
+    const notreEcoleSection = document.getElementById("notre-ecole");
+    if (notreEcoleSection) {
+      notreEcoleSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
-    };
+    }
+  };
 
-    // Défilement automatique
-    const autoSlide = setInterval(() => {
-      currentIndex = (currentIndex + 1) % totalSlides;
-      moveToSlide(currentIndex);
-    }, 5000);
-
-    // Nettoyage
-    return () => clearInterval(autoSlide);
-  }, []);
+  // Fonction pour le défilement fluide vers Services
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById("services");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -48,11 +35,11 @@ export default function Home() {
       <div className="bg-gray-800 text-white py-2 px-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
           <div className="flex items-center space-x-6">
-            <span>Lun à Ven – 9h00 à 17h00</span>
-            <span>+33 (0)1 23 45 67 89</span>
+            <span>Lun à Ven – 8h00 à 18h00</span>
+            <span>+212 6 75 75 19 09</span>
           </div>
           <div className="hidden md:block">
-            <span>123 Rue de l'Éducation, 75001 Paris</span>
+            <span>348 Village Pilote Dar Bouazza, Casablanca</span>
           </div>
           <div className="flex items-center space-x-4">
             <a href="#" className="hover:text-blue-400 transition-colors">
@@ -90,52 +77,128 @@ export default function Home() {
           <div className="flex items-center">
             <Link
               href="/"
-              className="bg-green-500 text-white px-6 py-2 rounded-full font-bold text-xl hover:bg-green-600 transition-colors"
+              className="flex items-center space-x-3 text-gray-700 hover:text-green-600 transition-all duration-300 font-bold text-xl group"
             >
-              Connect Montessori
+              <Image
+                src="/images/logo.png"
+                alt="Connect Montessori Logo"
+                width={32}
+                height={32}
+                className="object-contain group-hover:scale-110 transition-transform duration-300"
+              />
+              <span className="group-hover:translate-x-1 transition-transform duration-300">
+                Connect Montessori
+              </span>
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-8 text-gray-700">
+          <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="relative group font-bold text-lg text-green-600 transition-all duration-300 py-2 px-1"
             >
-              Accueil
+              <span className="relative z-10">Accueil</span>
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 rounded-lg -m-2"></div>
             </Link>
             <Link
               href="/maternelle"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
             >
-              Maternelle
+              <span className="relative z-10">Maternelle</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
             </Link>
             <Link
               href="/cours-soutien"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
             >
-              Cours de Soutien
+              <span className="relative z-10">Cours de Soutien</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
             </Link>
             <Link
               href="/contact"
-              className="hover:text-green-600 transition-colors font-medium"
+              className="relative group font-bold text-lg text-gray-800 hover:text-green-600 transition-all duration-300 py-2 px-1"
             >
-              Contact
+              <span className="relative z-10">Contact</span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-600 group-hover:w-full transition-all duration-300 rounded-full"></div>
+              <div className="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg -m-2"></div>
             </Link>
           </div>
-          <div>
-            <button className="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition-colors font-medium">
-              Prendre RDV
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-800 hover:text-green-600 transition-colors"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
             </button>
           </div>
         </div>
       </nav>
 
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
+          <div className="px-4 py-6 space-y-4">
+            <Link
+              href="/"
+              className="block font-bold text-lg text-green-600 transition-colors py-2"
+            >
+              Accueil
+            </Link>
+            <Link
+              href="/maternelle"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
+            >
+              Maternelle
+            </Link>
+            <Link
+              href="/cours-soutien"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
+            >
+              Cours de Soutien
+            </Link>
+            <Link
+              href="/contact"
+              className="block font-bold text-lg text-gray-800 hover:text-green-600 transition-colors py-2"
+            >
+              Contact
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
-      <section className="bg-purple-600 min-h-screen relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 py-20 flex items-center">
+      <section className="bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 min-h-screen relative overflow-hidden">
+        {/* Formes décoratives flottantes */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full animate-bounce"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-white/10 rounded-full animate-pulse"></div>
+          <div
+            className="absolute bottom-20 left-1/4 w-20 h-20 bg-white/10 rounded-full animate-bounce"
+            style={{ animationDelay: "1s" }}
+          ></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 py-32 flex items-center relative z-10">
           {/* Left Content Block */}
-          <div className="w-1/2 text-white z-10 relative">
+          <div className="w-1/2 text-white relative">
             <div className="mb-6">
-              <span className="text-lg font-medium bg-white/20 px-4 py-2 rounded-full">
+              <span className="text-lg font-medium bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
                 Où Chaque Enfant Brille !
               </span>
             </div>
@@ -144,23 +207,28 @@ export default function Home() {
               <br />
               Grandir Ensemble !
             </h1>
-            <button className="bg-white text-gray-800 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
-              En Savoir Plus
+            <button
+              onClick={scrollToNotreEcole}
+              className="bg-white text-gray-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+            >
+              Découvrir l'école
             </button>
           </div>
 
           {/* Right Image Block */}
           <div className="w-1/2 flex justify-center items-center relative">
             <div className="relative">
-              {/* Organic-shaped frame */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-[60px] transform rotate-12 scale-110"></div>
-              <div className="relative bg-white p-4 rounded-[50px] transform rotate-12">
-                <div className="w-80 h-80 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-[40px] flex items-center justify-center">
-                  <div className="text-center text-gray-700">
-                    <div className="text-6xl mb-2">🧸</div>
-                    <div className="text-2xl font-bold">Montessori</div>
-                    <div className="text-lg">Éducation</div>
-                  </div>
+              {/* Modern frame design */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl shadow-2xl scale-105"></div>
+              <div className="relative bg-white p-6 rounded-2xl shadow-xl">
+                <div className="w-88 h-88 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-xl flex items-center justify-center p-4">
+                  <Image
+                    src="/images/full_logo.png"
+                    alt="Connect Montessori Logo"
+                    width={229}
+                    height={229}
+                    className="object-contain drop-shadow-lg"
+                  />
                 </div>
               </div>
             </div>
@@ -178,176 +246,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section Avantages Montessori */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          {/* En-tête de section */}
-          <div className="text-center mb-16">
-            <span className="text-orange-500 font-semibold text-lg">
-              Services que nous proposons
-            </span>
-            <h2 className="text-4xl font-bold text-gray-800 mt-2">
-              Offrir une éducation de qualité pour vos enfants
-            </h2>
-          </div>
-
-          {/* Grille des 8 cartes */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Carte 1 - Apprentissage et Amusement */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">🎨</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">
-                    Apprentissage & Amusement
-                  </h3>
-                  <p className="text-sm leading-relaxed">
-                    L'enfant apprend naturellement en s'amusant, développant sa
-                    curiosité et sa motivation intrinsèque.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Carte 2 - Compétences Numériques */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">💻</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">
-                    Compétences Numériques
-                  </h3>
-                  <p className="text-sm leading-relaxed">
-                    Introduction progressive aux technologies modernes dans un
-                    environnement contrôlé et éducatif.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Carte 3 - Découverte du Monde */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">🏭</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">
-                    Découverte du Monde
-                  </h3>
-                  <p className="text-sm leading-relaxed">
-                    L'enfant explore différents domaines et développe une
-                    compréhension globale de son environnement.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Carte 4 - Environnement Bienveillant */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-red-400 to-pink-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">🏠</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">
-                    Environnement Bienveillant
-                  </h3>
-                  <p className="text-sm leading-relaxed">
-                    Un cadre chaleureux et sécurisant qui respecte le rythme et
-                    les besoins de chaque enfant.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Carte 5 - Jeu Créatif */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-green-400 to-teal-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">🎭</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">Jeu Créatif</h3>
-                  <p className="text-sm leading-relaxed">
-                    Stimulation de l'imagination et de la créativité à travers
-                    des activités artistiques et ludiques.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Carte 6 - Compétences Précoces */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-purple-400 to-violet-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">🔬</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">
-                    Compétences Précoces
-                  </h3>
-                  <p className="text-sm leading-relaxed">
-                    Développement précoce des compétences cognitives, sociales
-                    et motrices selon les périodes sensibles.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Carte 7 - Apprentissage Pratique */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-pink-400 to-fuchsia-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">✋</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">
-                    Apprentissage Pratique
-                  </h3>
-                  <p className="text-sm leading-relaxed">
-                    Manipulation concrète du matériel pour une compréhension
-                    profonde et durable des concepts.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Carte 8 - Exploration Joyeuse */}
-            <div className="group relative">
-              <div className="bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
-                <div className="relative z-10">
-                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-3xl">🔍</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">
-                    Exploration Joyeuse
-                  </h3>
-                  <p className="text-sm leading-relaxed">
-                    Découverte autonome et enthousiaste du monde, favorisant
-                    l'émerveillement et l'apprentissage naturel.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section Nos Valeurs Fondamentales */}
-      <section className="py-20 bg-white">
+      {/* Section Notre École */}
+      <section id="notre-ecole" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Partie gauche - Contenu textuel */}
@@ -364,13 +264,12 @@ export default function Home() {
 
               {/* Paragraphe descriptif */}
               <p className="text-gray-600 text-lg leading-relaxed">
-                Connect Montessori est une école maternelle d'excellence située
-                au cœur de Paris, dédiée à l'épanouissement de chaque enfant.
-                Notre établissement applique la pédagogie Montessori, une
-                méthode éducative centenaire qui respecte le rythme naturel de
-                développement de l'enfant. Nous créons un environnement préparé
-                où chaque enfant peut explorer, découvrir et grandir en toute
-                autonomie.
+                Connect Montessori est une école maternelle d'excellence, dédiée
+                à l'épanouissement de chaque enfant. Notre établissement
+                applique la pédagogie Montessori, une méthode éducative
+                centenaire qui respecte le rythme naturel de développement de
+                l'enfant. Nous créons un environnement préparé où chaque enfant
+                peut explorer, découvrir et grandir en toute autonomie.
               </p>
 
               {/* Liste des 4 fonctionnalités */}
@@ -396,7 +295,7 @@ export default function Home() {
                     3
                   </div>
                   <span className="text-gray-700 font-medium">
-                    Centre de Paris
+                    Pédagogie Alternative
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -410,7 +309,10 @@ export default function Home() {
               </div>
 
               {/* Bouton d'action */}
-              <button className="bg-pink-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-pink-600 transition-colors">
+              <button
+                onClick={scrollToServices}
+                className="bg-pink-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-pink-600 transition-colors cursor-pointer"
+              >
                 Découvrir Plus
               </button>
 
@@ -427,9 +329,9 @@ export default function Home() {
                     <div>
                       <p className="font-semibold text-gray-800">Adresse</p>
                       <p className="text-gray-600 text-sm">
-                        123 Rue de l'Éducation
+                        348 Village Pilote Dar Bouazza
                         <br />
-                        75001 Paris, France
+                        Casablanca, Maroc
                       </p>
                     </div>
                   </div>
@@ -440,7 +342,7 @@ export default function Home() {
                     <div>
                       <p className="font-semibold text-gray-800">Téléphone</p>
                       <p className="text-gray-600 text-sm">
-                        +33 (0)1 23 45 67 89
+                        +212 6 75 75 19 09
                       </p>
                     </div>
                   </div>
@@ -452,8 +354,6 @@ export default function Home() {
                       <p className="font-semibold text-gray-800">Horaires</p>
                       <p className="text-gray-600 text-sm">
                         Lun-Ven: 8h00-18h00
-                        <br />
-                        Sam: 9h00-12h00
                       </p>
                     </div>
                   </div>
@@ -464,7 +364,7 @@ export default function Home() {
                     <div>
                       <p className="font-semibold text-gray-800">Email</p>
                       <p className="text-gray-600 text-sm">
-                        contact@connectmontessori.fr
+                        connectmontessoridedarb@gmail.com
                       </p>
                     </div>
                   </div>
@@ -555,6 +455,174 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section Avantages Montessori */}
+      <section id="services" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* En-tête de section */}
+          <div className="text-center mb-16">
+            <span className="text-orange-500 font-semibold text-lg">
+              Services que nous proposons
+            </span>
+            <h2 className="text-4xl font-bold text-gray-800 mt-2">
+              Offrir une éducation de qualité pour vos enfants
+            </h2>
+          </div>
+
+          {/* Grille des 8 cartes */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Carte 1 - Apprentissage et Amusement */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-80">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl">🎨</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">
+                    Apprentissage & Amusement
+                  </h3>
+                  <p className="text-sm leading-relaxed">
+                    L'enfant apprend naturellement en s'amusant, développant sa
+                    curiosité et sa motivation intrinsèque.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carte 2 - Compétences Numériques */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-80">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl">💻</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">
+                    Compétences Numériques
+                  </h3>
+                  <p className="text-sm leading-relaxed">
+                    Introduction progressive aux technologies modernes dans un
+                    environnement contrôlé et éducatif.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carte 3 - Découverte du Monde */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-80">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl">🏭</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">
+                    Découverte du Monde
+                  </h3>
+                  <p className="text-sm leading-relaxed">
+                    L'enfant explore différents domaines et développe une
+                    compréhension globale de son environnement.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carte 4 - Environnement Bienveillant */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-red-400 to-pink-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-80">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl">🏠</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">
+                    Environnement Bienveillant
+                  </h3>
+                  <p className="text-sm leading-relaxed">
+                    Un cadre chaleureux et sécurisant qui respecte le rythme et
+                    les besoins de chaque enfant.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carte 5 - Jeu Créatif */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-green-400 to-teal-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-80">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl">🎭</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">Jeu Créatif</h3>
+                  <p className="text-sm leading-relaxed">
+                    Stimulation de l'imagination et de la créativité à travers
+                    des activités artistiques et ludiques.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carte 6 - Compétences Précoces */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-purple-400 to-violet-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-80">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl">🔬</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">
+                    Compétences Précoces
+                  </h3>
+                  <p className="text-sm leading-relaxed">
+                    Développement précoce des compétences cognitives, sociales
+                    et motrices selon les périodes sensibles.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carte 7 - Apprentissage Pratique */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-pink-400 to-fuchsia-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-80">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl">✋</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">
+                    Apprentissage Pratique
+                  </h3>
+                  <p className="text-sm leading-relaxed">
+                    Manipulation concrète du matériel pour une compréhension
+                    profonde et durable des concepts.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carte 8 - Exploration Joyeuse */}
+            <div className="group relative">
+              <div className="bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl p-6 text-white text-center hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-80">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl">🔍</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">
+                    Exploration Joyeuse
+                  </h3>
+                  <p className="text-sm leading-relaxed">
+                    Découverte autonome et enthousiaste du monde, favorisant
+                    l'émerveillement et l'apprentissage naturel.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Section Avis des Parents */}
       <section className="py-20 bg-gradient-to-r from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
@@ -572,311 +640,104 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Carrousel des avis */}
-          <div className="relative overflow-hidden">
-            {/* Boutons de navigation */}
-            <button
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 group"
-              onClick={() => {
-                const container = document.getElementById(
-                  "testimonials-container"
-                );
-                if (container) {
-                  const currentTransform = container.style.transform;
-                  const currentX = currentTransform
-                    ? parseInt(currentTransform.match(/-?\d+/)?.[0] || "0")
-                    : 0;
-                  const slideWidth = 400 + 32;
-                  const newX = Math.min(0, currentX + slideWidth);
-                  container.style.transform = `translateX(${newX}px)`;
-
-                  // Mise à jour des indicateurs
-                  const currentIndex = Math.abs(Math.round(newX / slideWidth));
-                  document
-                    .querySelectorAll("[data-indicator]")
-                    .forEach((indicator, index) => {
-                      if (index === currentIndex) {
-                        indicator.classList.add("bg-blue-500");
-                        indicator.classList.remove("bg-gray-300");
-                      } else {
-                        indicator.classList.remove("bg-blue-500");
-                        indicator.classList.add("bg-gray-300");
-                      }
-                    });
-                }
-              }}
-            >
-              <svg
-                className="w-6 h-6 text-gray-600 group-hover:text-blue-600 transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <button
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-all duration-300 group"
-              onClick={() => {
-                const container = document.getElementById(
-                  "testimonials-container"
-                );
-                if (container) {
-                  const currentTransform = container.style.transform;
-                  const currentX = currentTransform
-                    ? parseInt(currentTransform.match(/-?\d+/)?.[0] || "0")
-                    : 0;
-                  const slideWidth = 400 + 32;
-                  const maxX = -(4 * slideWidth); // 5 avis, donc 4 déplacements
-                  const newX = Math.max(maxX, currentX - slideWidth);
-                  container.style.transform = `translateX(${newX}px)`;
-
-                  // Mise à jour des indicateurs
-                  const currentIndex = Math.abs(Math.round(newX / slideWidth));
-                  document
-                    .querySelectorAll("[data-indicator]")
-                    .forEach((indicator, index) => {
-                      if (index === currentIndex) {
-                        indicator.classList.add("bg-blue-500");
-                        indicator.classList.remove("bg-gray-300");
-                      } else {
-                        indicator.classList.remove("bg-blue-500");
-                        indicator.classList.add("bg-gray-300");
-                      }
-                    });
-                }
-              }}
-            >
-              <svg
-                className="w-6 h-6 text-gray-600 group-hover:text-blue-600 transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-
-            {/* Container des avis avec défilement */}
-            <div
-              className="flex space-x-8 transition-transform duration-700 ease-in-out"
-              id="testimonials-container"
-            >
-              {/* Avis 1 */}
-              <div className="min-w-[400px] bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
-                    S
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-800">Sophie Martin</h4>
-                    <p className="text-gray-500 text-sm">
-                      Maman de Emma, 4 ans
-                    </p>
-                  </div>
-                  <div className="ml-auto">
-                    <div className="flex space-x-1">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-5 h-5 text-yellow-400"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
+          {/* Grille des 3 témoignages */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Avis 1 */}
+            <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
+                  S
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-800">Maman de Lina</h4>
+                  <p className="text-gray-500 text-sm">4 ans</p>
+                </div>
+                <div className="ml-auto">
+                  <div className="flex space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <svg
+                        key={i}
+                        className="w-5 h-5 text-yellow-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
                   </div>
                 </div>
-                <p className="text-gray-600 leading-relaxed italic">
-                  "Connect Montessori a transformé l'expérience d'apprentissage
-                  d'Emma. Elle est devenue plus autonome et curieuse. Les
-                  éducateurs sont exceptionnels et l'environnement est
-                  parfaitement adapté aux enfants."
-                </p>
               </div>
-
-              {/* Avis 2 */}
-              <div className="min-w-[400px] bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
-                    T
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-800">Thomas Dubois</h4>
-                    <p className="text-gray-500 text-sm">
-                      Papa de Lucas, 5 ans
-                    </p>
-                  </div>
-                  <div className="ml-auto">
-                    <div className="flex space-x-1">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-5 h-5 text-yellow-400"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-600 leading-relaxed italic">
-                  "La pédagogie Montessori a permis à Lucas de développer sa
-                  confiance en lui et ses compétences sociales. L'équipe
-                  pédagogique est très professionnelle et bienveillante. Je
-                  recommande vivement !"
-                </p>
-              </div>
-
-              {/* Avis 3 */}
-              <div className="min-w-[400px] bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-red-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
-                    M
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-800">Marie Laurent</h4>
-                    <p className="text-gray-500 text-sm">
-                      Maman de Chloé, 3 ans
-                    </p>
-                  </div>
-                  <div className="ml-auto">
-                    <div className="flex space-x-1">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-5 h-5 text-yellow-400"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-600 leading-relaxed italic">
-                  "Chloé adore aller à l'école ! L'approche Montessori respecte
-                  vraiment son rythme et ses centres d'intérêt. Elle a fait des
-                  progrès incroyables en motricité fine et en langage."
-                </p>
-              </div>
-
-              {/* Avis 4 */}
-              <div className="min-w-[400px] bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
-                    A
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-800">Antoine Moreau</h4>
-                    <p className="text-gray-500 text-sm">Papa de Noah, 4 ans</p>
-                  </div>
-                  <div className="ml-auto">
-                    <div className="flex space-x-1">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-5 h-5 text-yellow-400"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-600 leading-relaxed italic">
-                  "L'école Connect Montessori offre un environnement
-                  exceptionnel. Noah a développé une vraie passion pour les
-                  mathématiques grâce au matériel Montessori. L'équipe est très
-                  à l'écoute des parents."
-                </p>
-              </div>
-
-              {/* Avis 5 */}
-              <div className="min-w-[400px] bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
-                    L
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-800">Léa Bernard</h4>
-                    <p className="text-gray-500 text-sm">Maman de Zoé, 5 ans</p>
-                  </div>
-                  <div className="ml-auto">
-                    <div className="flex space-x-1">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-5 h-5 text-yellow-400"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-600 leading-relaxed italic">
-                  "Zoé est devenue plus autonome et responsable depuis qu'elle
-                  fréquente Connect Montessori. La pédagogie respecte vraiment
-                  l'enfant et ses besoins. C'est exactement ce que nous
-                  cherchions !"
-                </p>
-              </div>
+              <p className="text-gray-600 leading-relaxed italic">
+                "Connect Montessori a transformé l'expérience d'apprentissage de
+                Lina. Elle est devenue plus autonome et curieuse. Les éducateurs
+                sont exceptionnels et l'environnement est parfaitement adapté
+                aux enfants."
+              </p>
             </div>
 
-            {/* Indicateurs de navigation */}
-            <div className="flex justify-center mt-8 space-x-3">
-              {[...Array(5)].map((_, i) => (
-                <button
-                  key={i}
-                  data-indicator
-                  className={`w-3 h-3 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                    i === 0 ? "bg-blue-500" : "bg-gray-300 hover:bg-blue-500"
-                  }`}
-                  onClick={() => {
-                    const container = document.getElementById(
-                      "testimonials-container"
-                    );
-                    if (container) {
-                      const slideWidth = 400 + 32;
-                      const translateX = -i * slideWidth;
-                      container.style.transform = `translateX(${translateX}px)`;
+            {/* Avis 2 */}
+            <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
+                  T
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-800">Papa de Yassir</h4>
+                  <p className="text-gray-500 text-sm">5 ans</p>
+                </div>
+                <div className="ml-auto">
+                  <div className="flex space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <svg
+                        key={i}
+                        className="w-5 h-5 text-yellow-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <p className="text-gray-600 leading-relaxed italic">
+                "La pédagogie Montessori a permis à Yassir de développer sa
+                confiance en lui et ses compétences sociales. L'équipe
+                pédagogique est très professionnelle et bienveillante. Je
+                recommande vivement !"
+              </p>
+            </div>
 
-                      // Mise à jour des indicateurs
-                      document
-                        .querySelectorAll("[data-indicator]")
-                        .forEach((indicator, index) => {
-                          if (index === i) {
-                            indicator.classList.add("bg-blue-500");
-                            indicator.classList.remove("bg-gray-300");
-                          } else {
-                            indicator.classList.remove("bg-blue-500");
-                            indicator.classList.add("bg-gray-300");
-                          }
-                        });
-                    }
-                  }}
-                ></button>
-              ))}
+            {/* Avis 3 */}
+            <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-400 to-red-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
+                  M
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-800">Maman de Sara</h4>
+                  <p className="text-gray-500 text-sm">3 ans</p>
+                </div>
+                <div className="ml-auto">
+                  <div className="flex space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <svg
+                        key={i}
+                        className="w-5 h-5 text-yellow-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <p className="text-gray-600 leading-relaxed italic">
+                "Sara adore aller à l'école ! L'approche Montessori respecte
+                vraiment son rythme et ses centres d'intérêt. Elle a fait des
+                progrès incroyables en motricité fine et en langage."
+              </p>
             </div>
           </div>
         </div>
@@ -885,8 +746,8 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-3">
               <h3 className="text-xl font-bold mb-4 text-green-400">
                 Connect Montessori
               </h3>
@@ -895,7 +756,7 @@ export default function Home() {
                 Montessori pour un développement optimal de l'enfant.
               </p>
             </div>
-            <div>
+            <div className="md:col-span-2">
               <h4 className="text-lg font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-gray-300">
                 <li>Maternelle Montessori</li>
@@ -904,16 +765,16 @@ export default function Home() {
                 <li>Activités Éducatives</li>
               </ul>
             </div>
-            <div>
+            <div className="md:col-span-4">
               <h4 className="text-lg font-semibold mb-4">Contact</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>📞 +33 (0)1 23 45 67 89</li>
-                <li>📧 contact@connectmontessori.fr</li>
-                <li>📍 123 Rue de l'Éducation</li>
-                <li>🏙️ 75001 Paris, France</li>
+                <li>📞 +212 6 75 75 19 09</li>
+                <li>📧 connectmontessoridedarb@gmail.com</li>
+                <li>📍 348 Village Pilote Dar Bouazza</li>
+                <li>🏙️ Casablanca, Maroc</li>
               </ul>
             </div>
-            <div>
+            <div className="md:col-span-3">
               <h4 className="text-lg font-semibold mb-4">Suivez-nous</h4>
               <div className="flex space-x-4">
                 <a
@@ -944,7 +805,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Connect Montessori. Tous droits réservés.</p>
+            <p>&copy; 2025 Connect Montessori. Tous droits réservés.</p>
           </div>
         </div>
       </footer>
