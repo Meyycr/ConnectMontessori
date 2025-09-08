@@ -183,7 +183,7 @@ export default function Home() {
       )}
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 min-h-screen relative overflow-hidden">
+      <section className="bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 min-h-[80vh] lg:min-h-screen relative overflow-hidden">
         {/* Formes décoratives flottantes */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full animate-bounce"></div>
@@ -194,41 +194,43 @@ export default function Home() {
           ></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 py-32 flex items-center relative z-10">
-          {/* Left Content Block */}
-          <div className="w-1/2 text-white relative">
-            <div className="mb-6">
-              <span className="text-lg font-medium bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
-                Où Chaque Enfant Brille !
-              </span>
+        <div className="max-w-7xl mx-auto px-4 py-16 md:py-32 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            {/* Left Content Block */}
+            <div className="text-white relative order-2 lg:order-1">
+              <div className="mb-6">
+                <span className="text-lg font-medium bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
+                  Où Chaque Enfant Brille !
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8">
+                Jouer, Apprendre,
+                <br />
+                Grandir Ensemble !
+              </h1>
+              <button
+                onClick={scrollToNotreEcole}
+                className="bg-white text-gray-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              >
+                Découvrir l'école
+              </button>
             </div>
-            <h1 className="text-6xl font-bold leading-tight mb-8">
-              Jouer, Apprendre,
-              <br />
-              Grandir Ensemble !
-            </h1>
-            <button
-              onClick={scrollToNotreEcole}
-              className="bg-white text-gray-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 cursor-pointer"
-            >
-              Découvrir l'école
-            </button>
-          </div>
 
-          {/* Right Image Block */}
-          <div className="w-1/2 flex justify-center items-center relative">
-            <div className="relative">
-              {/* Modern frame design */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl shadow-2xl scale-105"></div>
-              <div className="relative bg-white p-6 rounded-2xl shadow-xl">
-                <div className="w-88 h-88 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-xl flex items-center justify-center p-4">
-                  <Image
-                    src="/images/full_logo.png"
-                    alt="Connect Montessori Logo"
-                    width={229}
-                    height={229}
-                    className="object-contain drop-shadow-lg"
-                  />
+            {/* Right Image Block */}
+            <div className="flex justify-center items-center relative order-1 lg:order-2">
+              <div className="relative">
+                {/* Modern frame design */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl shadow-2xl scale-105"></div>
+                <div className="relative bg-white p-4 md:p-6 rounded-2xl shadow-xl">
+                  <div className="w-64 h-64 md:w-80 md:h-80 lg:w-88 lg:h-88 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-xl flex items-center justify-center p-4">
+                    <Image
+                      src="/images/full_logo.png"
+                      alt="Connect Montessori Logo"
+                      width={229}
+                      height={229}
+                      className="object-contain drop-shadow-lg w-full h-full"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
