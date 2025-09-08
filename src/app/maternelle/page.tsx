@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Maternelle() {
-  const [showTarifs, setShowTarifs] = useState(false);
   const [showFournitures, setShowFournitures] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -215,44 +214,54 @@ export default function Maternelle() {
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-            {/* Bouton Tarifs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Encadré Contact */}
             <div className="group relative">
-              <div className="bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
+              <div className="bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-full">
                 <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col h-full">
                   <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-4xl">💰</span>
+                    <span className="text-4xl">📞</span>
                   </div>
                   <h3 className="text-2xl font-bold mb-4">
-                    Tarifs & Inscriptions
+                    Informations & Tarifs
                   </h3>
-                  <p className="text-white/90 mb-6">
-                    Découvrez nos tarifs transparents et nos options
-                    d'inscription
+                  <p className="text-white/90 mb-6 flex-grow">
+                    Pour obtenir nos tarifs et informations d'inscription,
+                    contactez-nous directement
                   </p>
-                  <button
-                    onClick={() => setShowTarifs(true)}
-                    className="bg-white text-green-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-                  >
-                    Voir les Tarifs
-                  </button>
+                  <div className="bg-white/20 rounded-xl p-4 mb-6">
+                    <p className="text-lg font-semibold mb-2">
+                      📱 Appelez-nous
+                    </p>
+                    <a
+                      href="https://wa.me/+2120675751909"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-2xl font-bold text-yellow-300 hover:text-yellow-200 transition-colors cursor-pointer"
+                    >
+                      +212 6 75 75 19 09
+                    </a>
+                  </div>
+                  <p className="text-white/80 text-sm">
+                    Lun à Ven – 8h00 à 18h00
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Bouton Fournitures */}
             <div className="group relative">
-              <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
+              <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-8 text-center text-white hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden h-full">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col h-full">
                   <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                     <span className="text-4xl">🎒</span>
                   </div>
                   <h3 className="text-2xl font-bold mb-4">
                     Fournitures & Matériel
                   </h3>
-                  <p className="text-white/90 mb-6">
+                  <p className="text-white/90 mb-6 flex-grow">
                     Liste des fournitures nécessaires et matériel pédagogique
                   </p>
                   <button
@@ -268,8 +277,8 @@ export default function Maternelle() {
         </div>
       </section>
 
-      {/* Modal Tarifs */}
-      {showTarifs && (
+      {/* Modal Tarifs - Supprimée */}
+      {false && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
             {/* Header */}
@@ -285,7 +294,7 @@ export default function Maternelle() {
                     <p className="text-xl opacity-90">Rentrée 2025 / 2026</p>
                   </div>
                   <button
-                    onClick={() => setShowTarifs(false)}
+                    onClick={() => {}}
                     className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
                   >
                     <svg
