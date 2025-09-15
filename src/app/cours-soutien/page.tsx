@@ -204,6 +204,29 @@ export default function CoursSoutien() {
         </div>
       </section>
 
+      {/* Section Image CS */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-center">
+            <div className="relative group">
+              {/* Modern frame design */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl shadow-2xl scale-105"></div>
+              <div className="relative bg-white rounded-2xl shadow-xl">
+                <div className="w-160 h-auto md:w-192 md:h-auto bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl flex items-center justify-center">
+                  <Image
+                    src="/images/CS.jpg"
+                    alt="Cours de Soutien - Connect Montessori"
+                    width={800}
+                    height={500}
+                    className="object-contain rounded-lg drop-shadow-lg w-full h-auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Section Cards des Cours Proposés */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4">
